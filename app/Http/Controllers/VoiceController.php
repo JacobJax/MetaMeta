@@ -18,17 +18,20 @@ class VoiceController extends Controller
         $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_2">';
         $response .= '<Say>Thank you fo calling metmeta. Dial 1 for account registration followed by the hash sign</Say>';
         $response .= '</GetDigits>';
+        echo $response;
 
         $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/existing_2">';
         $response .= '<Say>2 to check an existing account followed by the hash sign</Say>';
         $response .= '</GetDigits>';
         $response .= '</Response>';
+        echo $response;
 
-        
+
         $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/billing">';
         $response .= '<Say>3 for billing followed by the hash sign</Say>';
         $response .= '</GetDigits>';
         $response .= '</Response>';
+        echo $response;
 
 
         $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/agent">';
