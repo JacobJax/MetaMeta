@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('calls', function (Blueprint $table) {
             $table->id();
-            $table->string('idnumber');
-            $table->string('phonenumber');
+            $table->string('idnumber')->nullable();
+            $table->string('phonenumber')->nullable();
             $table->string('status')->nullable();
-            $table->string('status')->nullable();
+            $table->boolean('paymentstatus')->default(0);
             $table->timestamps();
         });
     }
