@@ -140,7 +140,7 @@ class VoiceController extends Controller
     }
     public function sms($phone, $message)
     {
-        $url = 'https://9244-41-139-168-163.eu.ngrok.io/send_message';
+        $url = 'https://c6ac-41-139-168-163.eu.ngrok.io/send_message/send_message';
 
         $response = Http::post($url, [
             'tel_num' => $phone,
