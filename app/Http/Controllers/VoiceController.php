@@ -18,6 +18,8 @@ class VoiceController extends Controller
         $response .= '<Say>Thank you fo calling metmeta. Dial 1 for account registration followed by the hash sign</Say>';
         $response .= '</GetDigits>';
         $response .= '</Response>';
+
+        echo $response;
     }
 
     public function dial_2()
@@ -29,6 +31,9 @@ class VoiceController extends Controller
         $response .= '<Say>Enter your id number followed by the hash sign.</Say>';
         $response .= '</GetDigits>';
         $response .= '</Response>';
+
+        echo $response;
+
     }
     public function dial_3()
     {
@@ -39,6 +44,8 @@ class VoiceController extends Controller
         $response .= '<Say>Enter your id number followed by the hash sign.</Say>';
         $response .= '</GetDigits>';
         $response .= '</Response>';
+        echo $response;
+
     }
 
     public function event()
