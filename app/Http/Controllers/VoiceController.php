@@ -12,7 +12,6 @@ class VoiceController extends Controller
 {
     public function dial()
     {
-        // Compose the response
         $response  = '<?xml version="1.0" encoding="UTF-8"?>';
         $response .= '<Response>';
         $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_2">';
