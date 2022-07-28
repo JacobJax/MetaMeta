@@ -15,7 +15,7 @@ class VoiceController extends Controller
         // Compose the response
         $response  = '<?xml version="1.0" encoding="UTF-8"?>';
         $response .= '<Response>';
-        $response .= '<GetDigits finishOnKey="#" callbackUrl="https://ufxfolbhbt.sharedwithexpose.com/api/dial_2">';
+        $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_2">';
         $response .= '<Say>Thank you fo calling metmeta. Dial 1 for account registration followed by the hash sign</Say>';
         $response .= '</GetDigits>';
         $response .= '</Response>';
@@ -26,7 +26,7 @@ class VoiceController extends Controller
         
         $response  = '<?xml version="1.0" encoding="UTF-8"?>';
         $response .= '<Response>';
-        $response .= '<GetDigits finishOnKey="#" callbackUrl="https://ufxfolbhbt.sharedwithexpose.com/api/dial_3">';
+        $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_3">';
         $response .= '<Say>Enter your id number followed by the hash sign.</Say>';
         $response .= '</GetDigits>';
         $response .= '</Response>';
@@ -36,7 +36,7 @@ class VoiceController extends Controller
         
         $response  = '<?xml version="1.0" encoding="UTF-8"?>';
         $response .= '<Response>';
-        $response .= '<GetDigits finishOnKey="#" callbackUrl="https://ufxfolbhbt.sharedwithexpose.com/api/dial_3">';
+        $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_3">';
         $response .= '<Say>Enter your id number followed by the hash sign.</Say>';
         $response .= '</GetDigits>';
         $response .= '</Response>';
