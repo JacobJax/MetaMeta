@@ -125,8 +125,8 @@ class VoiceController extends Controller
     }
     public function dial_3(Request $request)
     {
-        $phone = $request->callerNumber;
-        $idnumber = $request->dtmfDigits;
+        // $phone = $request->callerNumber;
+        // $idnumber = $request->dtmfDigits;
 
         $response  = '<?xml version="1.0" encoding="UTF-8"?>';
         $response .= '<Response>';
