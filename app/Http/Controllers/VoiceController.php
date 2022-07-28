@@ -8,6 +8,7 @@ use App\Models\Call;
 use App\Models\Voice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class VoiceController extends Controller 
 {
@@ -115,6 +116,10 @@ class VoiceController extends Controller
             // $call->save();
 
             echo $response;
+            
+            $message = 'Dear customer, your account status is as below. Status: pending Payment status: pending payment';
+
+            $this->sms($phone, $message);
         // } elseif ($request->dtmfDigits == 2) {
         //     $this->existing_2($request);
         // } elseif ($request->dtmfDigits == 3) { 
@@ -148,5 +153,16 @@ class VoiceController extends Controller
     {
         $this->dial();
         Log::debug($request->all());
+    }
+    public function sms($phone, $message)
+    {
+        $url = 'https://9244-41-139-168-163.eu.ngrok.io/send_message';
+
+        $response = Http::post($url, [
+            'tel_num' => $phone,
+            'message' => $message,
+        ]);
+
+
     }
 }
