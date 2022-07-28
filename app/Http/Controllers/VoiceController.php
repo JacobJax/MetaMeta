@@ -91,7 +91,7 @@ class VoiceController extends Controller
         }
 
         $response = '<Say>Thank you, you will receive a text message shortly.</Say>';
-        $response .= '</Response>';
+        $response .= '</Response>'; 
         echo  $response;
     }
     public function dial_2(Request $request)
