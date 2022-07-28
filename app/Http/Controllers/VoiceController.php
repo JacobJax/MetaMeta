@@ -29,5 +29,5 @@ class VoiceController extends Controller
     {
         Log::debug($request);
         $this->dial();
-    }
+    } 
 }
