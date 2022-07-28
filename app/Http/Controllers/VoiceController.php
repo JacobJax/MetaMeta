@@ -134,9 +134,9 @@ class VoiceController extends Controller
         $response .= '</Response>';
 
 
-        $call = Call::where('phonenumber', $phone)->first();
-        $call->idnumber = $idnumber;
-        $call->save();
+        // $call = Call::where('phonenumber', $phone)->first();
+        // $call->idnumber = $idnumber;
+        // $call->save();
         echo $response;
     }
 
