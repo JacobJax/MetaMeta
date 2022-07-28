@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::any('event', [VoiceController::class, 'event']);
 Route::any('callback', [VoiceController::class, 'callback']);
+Route::any('dial_2', [VoiceController::class, 'dial_2']);
+Route::any('dial_3', [VoiceController::class, 'dial_3']);
 
