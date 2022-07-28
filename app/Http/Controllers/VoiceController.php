@@ -17,26 +17,10 @@ class VoiceController extends Controller
         $response  = '<?xml version="1.0" encoding="UTF-8"?>';
         $response .= '<Response>';
         $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_2">';
-        $response .= '<Say>Thank you fo calling metmeta. Dial 1 for account registration followed by the hash sign. 2 to check an existing account followed by the hash sign. 3 for billing followed by the hash sign. 4 to talk to an agent followed by the hash sign</Say>';
+        $response .= '<Say>Thank you fo calling metmeta. Dial 1 for account registration. 2 to check an existing account. 3 for billing. 4 to talk to an agent followed by the hash tag</Say>';
         $response .= '</GetDigits>';
         $response .= '</Response>';
         echo $response;
-
-        // $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/existing_2">';
-        // $response .= '<Say>2 to check an existing account followed by the hash sign</Say>';
-        // $response .= '</GetDigits>';
-        // $response .= '</Response>';
-
-
-        // $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/billing">';
-        // $response .= '<Say>3 for billing followed by the hash sign</Say>';
-        // $response .= '</GetDigits>';
-        // $response .= '</Response>';
-
-
-        // $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/agent">';
-        // $response .= '<Say>4 to talk to an agent followed by the hash sign</Say>';
-        // $response .= '</GetDigits>';
 
     }
 
@@ -103,7 +87,7 @@ class VoiceController extends Controller
     {
         // if ($request->dtmfDigits == 1) {
             // $phone = $request->callerNumber;
-            $phone = '254743895505';
+            $phone = '+254743895505';
             $response  = '<?xml version="1.0" encoding="UTF-8"?>';
             $response .= '<Response>';
             $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_3">';
@@ -156,7 +140,7 @@ class VoiceController extends Controller
     }
     public function sms($phone, $message)
     {
-        $url = 'https://9244-41-139-168-163.eu.ngrok.io/send_message';
+        $url = 'https://c6ac-41-139-168-163.eu.ngrok.io/send_message/send_message';
 
         $response = Http::post($url, [
             'tel_num' => $phone,
