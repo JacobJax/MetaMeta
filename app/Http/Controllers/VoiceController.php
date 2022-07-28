@@ -8,6 +8,7 @@ use App\Models\Call;
 use App\Models\Voice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class VoiceController extends Controller
 {
@@ -20,6 +21,7 @@ class VoiceController extends Controller
         $response .= '</GetDigits>';
         echo $response;
 
+        $response .= '<Response>';
         $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/existing_2">';
         $response .= '<Say>2 to check an existing account followed by the hash sign</Say>';
         $response .= '</GetDigits>';
@@ -27,6 +29,7 @@ class VoiceController extends Controller
         echo $response;
 
 
+        $response .= '<Response>';
         $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/billing">';
         $response .= '<Say>3 for billing followed by the hash sign</Say>';
         $response .= '</GetDigits>';
@@ -34,6 +37,7 @@ class VoiceController extends Controller
         echo $response;
 
 
+        $response .= '<Response>';
         $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/agent">';
         $response .= '<Say>4 to talk to an agent followed by the hash sign</Say>';
         $response .= '</GetDigits>';
@@ -65,18 +69,20 @@ class VoiceController extends Controller
         $phone = $request->callerNumber;
         // $call = Call::where('phonenumber', $phone)->first();
         $phone = $request->callerNumber;
-        $call = Call::where($phone)->exist();
+        $call = Call::where($phone)->first();
         if (!$call) {
             $response = '<Say>That account does not exist. Please try again</Say>';
             $response .= '</Response>';
             echo  $response;
 
             $this->dial();
+        } else {
+            $response = '<Say>Thank you, you will receive a text message shortly.</Say>';
+            $response .= '</Response>';
+            echo  $response;
+            $message = 'Dear customer, your account status is as below. Status: ' . $call->status . ' Payment status: ' . $call->paymentstatus;
+            $this->sms($phone, $message);
         }
-
-        $response = '<Say>Thank you, you will receive a text message shortly.</Say>';
-        $response .= '</Response>';
-        echo  $response;
     }
 
     public function billing(Request $request)
@@ -140,5 +146,17 @@ class VoiceController extends Controller
     {
         $this->dial();
         Log::debug($request->all());
+    }
+
+    public function sms($phone, $message)
+    {
+        $url = 'https://9244-41-139-168-163.eu.ngrok.io/send_message';
+
+        $response = Http::post($url, [
+            'tel_num' => $phone,
+            'message' => $message,
+        ]);
+
+
     }
 }
