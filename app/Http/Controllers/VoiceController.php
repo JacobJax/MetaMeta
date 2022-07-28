@@ -9,7 +9,7 @@ use App\Models\Voice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class VoiceController extends Controller
+class VoiceController extends Controller 
 {
     public function dial()
     {
@@ -41,10 +41,12 @@ class VoiceController extends Controller
 
     public function agent(Request $request)
     {
-        $phone = $request->callerNumber;
+        // $phone = $request->callerNumber;
         // $call = Call::where('phonenumber', $phone)->first();
-        $phone = $request->callerNumber;
-        $call = Call::where($phone)->exist();
+        // $phone = $request->callerNumber;
+        // $call = Call::where($phone)->exist();
+
+        $call = true;
         if (!$call) {
             $response = '<Say>That account does not exist. Please try again</Say>';
             $response .= '</Response>';
@@ -59,10 +61,11 @@ class VoiceController extends Controller
     }
     public function existing_2(Request $request)
     {
-        $phone = $request->callerNumber;
+        // $phone = $request->callerNumber;
         // $call = Call::where('phonenumber', $phone)->first();
-        $phone = $request->callerNumber;
-        $call = Call::where($phone)->exist();
+        // $phone = $request->callerNumber;
+        // $call = Call::where($phone)->exist();
+        $call = true;
         if (!$call) {
             $response = '<Say>That account does not exist. Please try again</Say>';
             $response .= '</Response>';
@@ -78,7 +81,8 @@ class VoiceController extends Controller
 
     public function billing(Request $request)
     {
-        $phone = $request->callerNumber;
+        $call = true;
+        // $phone = $request->callerNumber;
         // $call = Call::where('phonenumber', $phone)->first();
         $phone = $request->callerNumber;
         $call = Call::where($phone)->exist();
@@ -96,8 +100,9 @@ class VoiceController extends Controller
     }
     public function dial_2(Request $request)
     {
-        if ($request->dtmfDigits == 1) {
-            $phone = $request->callerNumber;
+        // if ($request->dtmfDigits == 1) {
+            // $phone = $request->callerNumber;
+            $phone = '254743895505';
             $response  = '<?xml version="1.0" encoding="UTF-8"?>';
             $response .= '<Response>';
             $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_3">';
@@ -105,18 +110,18 @@ class VoiceController extends Controller
             $response .= '</GetDigits>';
             $response .= '</Response>';
 
-            $call = new Call();
-            $call->phonenumber = $phone;
-            $call->save();
+            // $call = new Call();
+            // $call->phonenumber = $phone;
+            // $call->save();
 
             echo $response;
-        } elseif ($request->dtmfDigits == 2) {
-            $this->existing_2($request);
-        } elseif ($request->dtmfDigits == 3) {
-            $this->billing($request);
-        } elseif ($request->dtmfDigits == 4) {
-            $this->agent($request);
-        }
+        // } elseif ($request->dtmfDigits == 2) {
+        //     $this->existing_2($request);
+        // } elseif ($request->dtmfDigits == 3) {
+        //     $this->billing($request);
+        // } elseif ($request->dtmfDigits == 4) {
+        //     $this->agent($request);
+        // }
     }
     public function dial_3(Request $request)
     {
