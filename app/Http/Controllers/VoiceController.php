@@ -8,7 +8,7 @@ use App\Models\Call;
 use App\Models\Voice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
- 
+
 class VoiceController extends Controller
 {
     public function dial()
@@ -16,27 +16,27 @@ class VoiceController extends Controller
         $response  = '<?xml version="1.0" encoding="UTF-8"?>';
         $response .= '<Response>';
         $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_2">';
-        $response .= '<Say>Thank you fo calling metmeta. Dial 1 for account registration followed by the hash sign</Say>';
-        $response .= '</GetDigits>';
-
-        $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/existing_2">';
-        $response .= '<Say>2 to check an existing account followed by the hash sign</Say>';
+        $response .= '<Say>Thank you fo calling metmeta. Dial 1 for account registration followed by the hash sign. 2 to check an existing account followed by the hash sign. 3 for billing followed by the hash sign. 4 to talk to an agent followed by the hash sign</Say>';
         $response .= '</GetDigits>';
         $response .= '</Response>';
-
-        
-        $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/billing">';
-        $response .= '<Say>3 for billing followed by the hash sign</Say>';
-        $response .= '</GetDigits>';
-        $response .= '</Response>';
-
-
-        $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/agent">';
-        $response .= '<Say>4 to talk to an agent followed by the hash sign</Say>';
-        $response .= '</GetDigits>';
-        $response .= '</Response>';
-
         echo $response;
+
+        // $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/existing_2">';
+        // $response .= '<Say>2 to check an existing account followed by the hash sign</Say>';
+        // $response .= '</GetDigits>';
+        // $response .= '</Response>';
+
+
+        // $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/billing">';
+        // $response .= '<Say>3 for billing followed by the hash sign</Say>';
+        // $response .= '</GetDigits>';
+        // $response .= '</Response>';
+
+
+        // $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/agent">';
+        // $response .= '<Say>4 to talk to an agent followed by the hash sign</Say>';
+        // $response .= '</GetDigits>';
+
     }
 
     public function agent(Request $request)
@@ -91,31 +91,38 @@ class VoiceController extends Controller
         }
 
         $response = '<Say>Thank you, you will receive a text message shortly.</Say>';
-        $response .= '</Response>'; 
+        $response .= '</Response>';
         echo  $response;
     }
     public function dial_2(Request $request)
     {
-        $phone = $request->callerNumber;
-        $response  = '<?xml version="1.0" encoding="UTF-8"?>';
-        $response .= '<Response>';
-        $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_3">';
-        $response .= '<Say>Enter your id number followed by the hash sign.</Say>';
-        $response .= '</GetDigits>';
-        $response .= '</Response>';
+        if ($request->dtmfDigits == 1) {
+            $phone = $request->callerNumber;
+            $response  = '<?xml version="1.0" encoding="UTF-8"?>';
+            $response .= '<Response>';
+            $response .= '<GetDigits finishOnKey="#" callbackUrl="https://metameta8.herokuapp.com/api/dial_3">';
+            $response .= '<Say>Enter your id number followed by the hash sign.</Say>';
+            $response .= '</GetDigits>';
+            $response .= '</Response>';
 
-        $call = new Call();
-        $call->phonenumber = $phone;
-        $call->save();
+            $call = new Call();
+            $call->phonenumber = $phone;
+            $call->save();
 
-        echo $response;
-
+            echo $response;
+        } elseif ($request->dtmfDigits == 2) {
+            $this->existing_2($request);
+        } elseif ($request->dtmfDigits == 3) {
+            $this->billing($request);
+        } elseif ($request->dtmfDigits == 4) {
+            $this->agent($request);
+        }
     }
     public function dial_3(Request $request)
     {
         $phone = $request->callerNumber;
         $idnumber = $request->dtmfDigits;
-        
+
         $response  = '<?xml version="1.0" encoding="UTF-8"?>';
         $response .= '<Response>';
         $response .= '<Say>Thank you for calling Meta meta. You will get an SMS with your account number</Say>';
@@ -126,7 +133,6 @@ class VoiceController extends Controller
         $call->idnumber = $idnumber;
         $call->save();
         echo $response;
-
     }
 
     public function event()
