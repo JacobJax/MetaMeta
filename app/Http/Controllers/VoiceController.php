@@ -117,7 +117,7 @@ class VoiceController extends Controller
             echo $response;
         // } elseif ($request->dtmfDigits == 2) {
         //     $this->existing_2($request);
-        // } elseif ($request->dtmfDigits == 3) {
+        // } elseif ($request->dtmfDigits == 3) { 
         //     $this->billing($request);
         // } elseif ($request->dtmfDigits == 4) {
         //     $this->agent($request);
@@ -125,8 +125,8 @@ class VoiceController extends Controller
     }
     public function dial_3(Request $request)
     {
-        $phone = $request->callerNumber;
-        $idnumber = $request->dtmfDigits;
+        // $phone = $request->callerNumber;
+        // $idnumber = $request->dtmfDigits;
 
         $response  = '<?xml version="1.0" encoding="UTF-8"?>';
         $response .= '<Response>';
@@ -134,9 +134,9 @@ class VoiceController extends Controller
         $response .= '</Response>';
 
 
-        $call = Call::where('phonenumber', $phone)->first();
-        $call->idnumber = $idnumber;
-        $call->save();
+        // $call = Call::where('phonenumber', $phone)->first();
+        // $call->idnumber = $idnumber;
+        // $call->save();
         echo $response;
     }
 
