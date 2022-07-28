@@ -8,7 +8,7 @@ use App\Models\Call;
 use App\Models\Voice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-
+ 
 class VoiceController extends Controller
 {
     public function dial()
